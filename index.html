@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>列表自动滚动</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #parent {
+            width: 500px;
+            height: 500px;
+            background-color: beige;
+            margin: 50px auto;
+            overflow: hidden;
+
+        }
+
+        #child2 ul,
+        #child1 ul {
+            list-style: none;
+        }
+
+        #child2 ul li,
+        #child1 ul li {
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            background-color: azure;
+            margin: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="parent">
+        <div id="child1">
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+                <li>6</li>
+                <li>7</li>
+                <li>8</li>
+                <li>9</li>
+                <li>10</li>
+                <li>11</li>
+                <li>12</li>
+                <li>13</li>
+                <li>14</li>
+            </ul>
+        </div>
+        <div id="child2"></div>
+    </div>
+</body>
+<script>
+    var speed = 50
+    var parent = document.getElementById("parent");
+    var child1 = document.getElementById("child1");
+    var child2 = document.getElementById("child2");
+
+    if (child1.offsetHeight >= parent.offsetHeight) {
+        child2.innerHTML = child1.innerHTML
+    }
+
+    function Marquee() {
+        if (parent.scrollTop >= child1.offsetHeight) {
+            parent.scrollTop = 0;
+        } else {
+            parent.scrollTop = parent.scrollTop + 1;
+        }
+    }
+
+    var MyMar = setInterval(Marquee, speed)
+    parent.onmouseover = function () {
+        clearInterval(MyMar)
+    }
+    parent.onmouseout = function () {
+        MyMar = setInterval(Marquee, speed)
+    }
+</script>
+
+</html>
